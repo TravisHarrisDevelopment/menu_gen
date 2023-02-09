@@ -74,26 +74,3 @@ func main() {
 	}
 	fmt.Println(menu)
 }
-
-/* My python code
-for day in days:
-    if leftovers==0:
-        choice = random.randint(0, (len(rows)-1))
-        recipe = rows[choice][0]
-        print("Should be adding", day, "recipe as",rows[choice])
-        print("numdays", int(rows[choice][1])/4)
-        numdays = int(rows[choice][1])/4
-        del rows[choice]
-        if numdays == 3:
-            menu.append([day, recipe])
-            leftovers = 2
-        elif numdays == 2:
-            menu.append([day, recipe])
-            leftovers = 1
-        elif numdays ==1:
-            menu.append([day, recipe])
-            leftovers =0
-
-    elif leftovers>0:
-        menu.append([day, recipe])
-        leftovers = leftovers-1*/
