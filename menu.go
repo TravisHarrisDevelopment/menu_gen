@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // note to self this remove method does not preserve order
@@ -17,8 +18,7 @@ func remove(s [][]string, i int) [][]string {
 }
 
 func main() {
-	fmt.Println("Hi")
-	fmt.Println("Loading Menu from csv")
+	fmt.Println("Loading Menu")
 	raw, err := os.ReadFile("recipes.csv")
 	if err != nil {
 		panic(err)
@@ -38,12 +38,16 @@ func main() {
 
 	days := []string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
 
+	rand.Seed(time.Now().UnixNano())
+
 	leftovers := 0
 	recipe := ""
 	menu := make([][]string, 0)
 	for _, v := range days {
 		if leftovers == 0 {
+			fmt.Println("A random number?", rand.Intn(len(recipes)))
 			choice := rand.Intn(len(recipes))
+			fmt.Println("choice:", choice)
 			recipe = recipes[choice][0]
 			fmt.Println("Adding ", v, "recipe :", recipes[choice])
 			numDays, err := strconv.Atoi(recipes[choice][1])
@@ -73,4 +77,7 @@ func main() {
 		}
 	}
 	fmt.Println(menu)
+	if leftovers > 0 {
+		fmt.Println("There are still leftovers.")
+	}
 }
