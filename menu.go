@@ -20,13 +20,11 @@ func remove(s [][]string, i int) [][]string {
 func printMenu(menu [][]string) {
 	println("This weeks menu selections:")
 	for _, recipe := range menu {
-		//println(recipe[0], "\t\t", recipe[1])
-		//	fmt.Printf("%s          %s\n", recipe[0], recipe[1])
 		fmt.Printf("%-12s %s\n", recipe[0], recipe[1])
 	}
 }
 
-func main() {
+func GetProspectiveRecipes() [][]string {
 	raw, err := os.ReadFile("recipes.csv")
 	if err != nil {
 		panic(err)
@@ -39,6 +37,13 @@ func main() {
 		panic(err)
 	}
 
+	return recipes
+}
+
+func main() {
+
+	recipes := GetProspectiveRecipes()
+
 	days := []string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
 
 	rand.Seed(time.Now().UnixNano())
@@ -46,33 +51,33 @@ func main() {
 	leftovers := 0
 	recipe := ""
 	menu := make([][]string, 0)
-	for _, v := range days {
+	for _, day := range days {
 		if leftovers == 0 {
 			choice := rand.Intn(len(recipes))
 			recipe = recipes[choice][0]
-			//fmt.Println("Adding ", v, "recipe :", recipes[choice])
+
 			numDays, err := strconv.Atoi(recipes[choice][1])
 			numDays /= 4
 			if err != nil {
 				panic(err)
 			}
-			//fmt.Println("this recipe lasts ", numDays, " days")
+
 			recipes = remove(recipes, choice)
 			if numDays == 3 {
-				toappend := []string{v, recipe}
+				toappend := []string{day, recipe}
 				menu = append(menu, toappend)
 				leftovers = 2
 			} else if numDays == 2 {
-				toappend := []string{v, recipe}
+				toappend := []string{day, recipe}
 				menu = append(menu, toappend)
 				leftovers = 1
 			} else if numDays == 1 {
-				toappend := []string{v, recipe}
+				toappend := []string{day, recipe}
 				menu = append(menu, toappend)
 				leftovers = 0
 			}
 		} else if leftovers > 0 {
-			toappend := []string{v, recipe}
+			toappend := []string{day, recipe}
 			menu = append(menu, toappend)
 			leftovers -= 1
 		}
