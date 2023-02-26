@@ -59,6 +59,9 @@ func confirmOperation(choice string) {
 }
 
 func ChangeNumberOfDiners() {
+	fmt.Println("Apologies this feature is coming.  We'll have to decide if we want " +
+		"to note that users will need to make more of a recipe if the number of diners " +
+		"is higher or if it would be better not to present recipes that don't make enough.")
 	var input int
 	fmt.Print("How many diners? ")
 	fmt.Scanln(&input)
