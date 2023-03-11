@@ -1,0 +1,9 @@
+Going to be adding an api to this solution.  At a minimum I'll be adding:
+/recipes/id
+GET route to return a recipe
+/recipes
+Get route to list recipes in json
+/menu/generate
+Get route to return menu for seven days
+/menu/generate/number
+get route to generate menu for number days
